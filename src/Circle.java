@@ -9,9 +9,12 @@ public class Circle extends JPanel implements ActionListener{
     /*start by creating screen Width and Height. In the main Class, I set the screen Size in a way it isn't resizable.
     So, if one is to change*/
 
-    private int xPosition = 400, yPosition = 400;
-    private int width = 10, height = 10;
+    private int xPosition, yPosition;
+    private int width, height;
     private int xSpeed = 3, ySpeed = 4;
+    /*Those here are, respectively, the X and Y position in which the ball will be summoned
+      */
+
 
     public int getXSpeed() {
         return xSpeed;
@@ -46,6 +49,8 @@ public class Circle extends JPanel implements ActionListener{
         return yPosition;
     }
 
+    /*Some getters and setters...*/
+
 
     public Circle(int xPosition, int yPosition, int width, int height) {
         this.xPosition = xPosition;
@@ -53,6 +58,7 @@ public class Circle extends JPanel implements ActionListener{
         this.width = width;
         this.height = height;
     }
+    /*The class constructor...*/
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -60,7 +66,8 @@ public class Circle extends JPanel implements ActionListener{
         g.fillOval(this.xPosition, this.yPosition, this.width, this.height);
 
     }
-
+    /*This method will draw a button with the specified x and y positions, width and height that were given in the
+      constructor.*/
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -75,4 +82,6 @@ public class Circle extends JPanel implements ActionListener{
             this.xSpeed *= -1;
         }
     }
+
+    /*This method here will handle the animation as well as the collision physics*/
 }
