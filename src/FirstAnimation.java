@@ -5,17 +5,34 @@ import java.awt.event.ActionListener;
 
 public class FirstAnimation extends JPanel implements ActionListener {
     Timer tm = new Timer(5, this);
-    Circle cOne = new Circle(400, 400, 50, 50);
+
+    Circle[] circles = new Circle[] {
+                new Circle(200, 400, 50, 50),
+                new Circle(400, 400, 50, 50),
+                new Circle(600, 400, 50, 50)
+    };
+
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        cOne.paintComponent(g);
+
+        for (Circle circle : circles) {
+            circle.paintComponent(g);
+        }
+
         tm.start();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        cOne.actionPerformed(e);
+        for (Circle circle : circles){
+            circle.actionPerformed(e);
+        }
+
+//        circles[0].checkCollisionBetweenBalls(circles[1]);
+//        circles[0].checkCollisionBetweenBalls(circles[2]);
+//        circles[1].checkCollisionBetweenBalls(circles[2]);
+//        Find a way to make this work through a loop method
         repaint();
     }
 

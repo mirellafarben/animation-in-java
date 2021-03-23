@@ -11,7 +11,7 @@ public class Circle extends JPanel implements ActionListener{
 
     private int xPosition, yPosition;
     private int width, height;
-    private int xSpeed = 3, ySpeed = 4;
+    private int xSpeed = 1, ySpeed = 1;
     /*Those here are, respectively, the X and Y position in which the ball will be summoned
       */
 
@@ -51,7 +51,6 @@ public class Circle extends JPanel implements ActionListener{
 
     /*Some getters and setters...*/
 
-
     public Circle(int xPosition, int yPosition, int width, int height) {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
@@ -74,7 +73,11 @@ public class Circle extends JPanel implements ActionListener{
 
         this.xPosition += this.xSpeed;
         this.yPosition += this.ySpeed;
+        checkWallCollision();
+    }
+    /*This method here will handle the animation*/
 
+    public void checkWallCollision(){
         if(this.yPosition < 0 || (this.yPosition + this.height + 35) > screenHeight){
             this.ySpeed *= -1;
         }
@@ -82,6 +85,24 @@ public class Circle extends JPanel implements ActionListener{
             this.xSpeed *= -1;
         }
     }
+    /*Check the collision between a ball and a wall.*/
 
-    /*This method here will handle the animation as well as the collision physics*/
+
+
+    public void checkCollisionBetweenBalls(Circle c){
+        boolean horizontalCollisionCaseOne = this.xPosition + this.width == c.getXPosition();
+        boolean horizontalCollisionCaseTwo = this.xPosition - this.width == c.getXPosition();
+
+//        boolean verticalCollisionCaseOne = ( this.yPosition + this.height == c.getYPosition());
+//        boolean verticalCollisionCaseTwo = ( this.yPosition - this.height  == c.getYPosition());
+//
+//        boolean generalCollisionCaseOne = horizontalCollisionCaseOne && verticalCollisionCaseTwo;
+//        boolean generalCollisionCaseTwo = horizontalCollisionCaseTwo && verticalCollisionCaseOne;
+
+        if( horizontalCollisionCaseOne || horizontalCollisionCaseTwo){
+
+            this.xSpeed *= -1;
+            c.setXSpeed( (c.getXSpeed() * -1) );
+        }
+    }
 }
